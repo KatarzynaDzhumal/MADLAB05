@@ -2,7 +2,7 @@ import {Text, SafeAreaView, TextInput, StyleSheet, View, Switch, Button, Touchab
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 import DatePicker from '../components/DatePicker';
-
+import Switch from '../components/Switch';
 import { useState } from 'react';
 
 export default function MovieBooking({ screenstyle }) {
@@ -10,12 +10,12 @@ export default function MovieBooking({ screenstyle }) {
   const [totalTickets, setTotaltickets] = useState(1);
   const [balcony, setBalcony] = useState(false);
   const [movieDate, setMoviedate] = useState(new Date());
-
-  // TODO 1:
-  // Create a movieList state variable using useState().
-  // Add an array of three movie objects.
-  // Each movie should have an id, title and age.
-
+  const [movieList, setMovieList] = useState([
+   {'id': 1, "title": "Kneecap", "age": 16},
+   {'id' : 2, "title": "Joker, Folie a Deux", "age": 18},
+   {'id': 3, "title": "Deadpool and Wolverine", "age": 12}
+  ]);
+  
   return (
     <View style={screenstyle}>
       <Text style={styles.label}>Choose Movie</Text>
@@ -24,16 +24,9 @@ export default function MovieBooking({ screenstyle }) {
         style={styles.textbox}
         selectedValue={movieChoice}
         onValueChange={(itemValue) => setMovieChoice(itemValue)}>
-        {/* TODO 2:
-            Use the map() function to loop through movieList.
-            Return a Picker.Item for each movie.
-            Use movie.title for the label and value.
-            Use movie.id as the key.*/
-             //add code here which will produce an appropriate <Picker.Item> tag for each movie.
-                 //instead of hard coding the label and value use {movie.title}
-          }
-
-
+        { movieList.map((movie) => {
+            return <Picker.Item  label={movie.title}  value={movie.title} /> 
+        })}
       </Picker>
 
       <DatePicker
@@ -55,6 +48,7 @@ export default function MovieBooking({ screenstyle }) {
       />
 
       <Text style={styles.label}>Balcony</Text>
+      
 
       <View style={{ alignItems: "flex-start", flexDirection: "row" }}>
         <Switch

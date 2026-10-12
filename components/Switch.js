@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, Switch as RNSwitch } from 'react-native';
+import { StyleSheet, View, Switch } from 'react-native';
 
 export default function Switch({ screenstyle, value, onValueChange }) {
   return (
